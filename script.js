@@ -21,8 +21,14 @@ document.addEventListener('click', e => {
 // ---- CALL POPUP ----
 const popup      = document.getElementById('callPopup');
 const closePopup = document.getElementById('closePopup');
-setTimeout(() => popup?.classList.add('visible'), 4000);
+if (popup && !sessionStorage.getItem('sappCallPopupShown')) {
+    setTimeout(() => {
+        popup.classList.add('visible');
+        sessionStorage.setItem('sappCallPopupShown', '1');
+    }, 600);
+}
 closePopup?.addEventListener('click', () => popup?.classList.remove('visible'));
+popup?.addEventListener('click', e => { if (e.target === popup) popup.classList.remove('visible'); });
 
 // ---- TRENDING CAROUSEL ----
 const carousel  = document.getElementById('trendingCarousel');

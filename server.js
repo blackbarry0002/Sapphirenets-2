@@ -54,7 +54,7 @@ const server = http.createServer((req, res) => {
                 res.end('500 Server Error');
                 return;
             }
-            
+
             // Determine content type
             const ext = path.extname(filePath);
             let contentType = 'text/html';
@@ -67,7 +67,12 @@ const server = http.createServer((req, res) => {
             if (ext === '.gif') contentType = 'image/gif';
             if (ext === '.webp') contentType = 'image/webp';
             if (ext === '.mp4') contentType = 'video/mp4';
-            
+
+            // Strip PHP tags for .php files
+            if (ext === '.php') {
+                data = data.replace(/<\?php[\s\S]*?\?>/g, '');
+            }
+
             res.writeHead(200, { 'Content-Type': contentType });
             res.end(data);
         });
