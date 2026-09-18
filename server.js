@@ -73,7 +73,12 @@ const server = http.createServer((req, res) => {
                 data = data.replace(/<\?php[\s\S]*?\?>/g, '');
             }
 
-            res.writeHead(200, { 'Content-Type': contentType });
+            const headers = {
+                'Content-Type': contentType,
+                'Cache-Control': 'public, max-age=3600',
+                'Access-Control-Allow-Origin': '*'
+            };
+            res.writeHead(200, headers);
             res.end(data);
         });
     });
