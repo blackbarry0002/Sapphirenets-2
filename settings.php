@@ -5,7 +5,7 @@
  */
 
 // Domain configuration
-define('DOMAIN', 'sapphireinternet.com');
+define('DOMAIN', 'sapphirenetservices.com');
 define('PROTOCOL', 'https://');
 
 // Site configuration
